@@ -157,19 +157,21 @@ export abstract class SocketStoreBase {
 
   updateRoomInfo() {
     if (this.getPageSpyConfig) {
-      const { project, title } = this.getPageSpyConfig();
+      const { project, title: _title } = this.getPageSpyConfig();
       const name = this.getClient?.().getName();
+      const group = String(project);
+      const title = String(_title);
       this.send(
         {
           type: SERVER_MESSAGE_TYPE.UPDATE_ROOM_INFO,
           content: {
             info: {
               name,
-              group: project,
+              group,
               tags: {
                 title,
                 name,
-                group: project,
+                group,
               },
             },
           },
